@@ -11,6 +11,48 @@
 
 DECLARE_GLOBAL_DATA_PTR;
 
+int arch_setup_bdinfo(void)
+{
+	bd_t *bd = gd->bd;
+
+	/*
+	 * Save local variables to board info struct
+	 */
+	bd->bi_memstart = CONFIG_SYS_SDRAM_BASE;	/* start of memory */
+	bd->bi_memsize = gd->ram_size;			/* size in bytes */
+
+	if (IS_ENABLED(CONFIG_SYS_HAS_SRAM)) {
+		bd->bi_sramstart = CONFIG_SYS_SRAM_BASE; /* start of SRAM */
+		bd->bi_sramsize = CONFIG_SYS_SRAM_SIZE;  /* size  of SRAM */
+	}
+
+#if defined(CONFIG_E500) || defined(CONFIG_MPC86xx)
+	bd->bi_immr_base = CONFIG_SYS_IMMR;	/* base  of IMMR register     */
+#endif
+
+#if defined(CONFIG_MPC83xx)
+	bd->bi_immrbar = CONFIG_SYS_IMMR;
+#endif
+
+	bd->bi_intfreq = gd->cpu_clk;	/* Internal Freq, in Hz */
+	bd->bi_busfreq = gd->bus_clk;	/* Bus Freq,      in Hz */
+
+#if defined(CONFIG_CPM2)
+	bd->bi_cpmfreq = gd->arch.cpm_clk;
+	bd->bi_brgfreq = gd->arch.brg_clk;
+	bd->bi_sccfreq = gd->arch.scc_clk;
+	bd->bi_vco = gd->arch.vco_out;
+#endif /* CONFIG_CPM2 */
+
+#if defined(CONFIG_EXTRA_CLOCK)
+	bd->bi_inpfreq = gd->arch.inp_clk;	/* input Freq in Hz */
+	bd->bi_vcofreq = gd->arch.vco_clk;	/* vco Freq in Hz */
+	bd->bi_flbfreq = gd->arch.flb_clk;	/* flexbus Freq in Hz */
+#endif
+
+	return 0;
+}
+
 void __weak board_detail(void)
 {
 	/* Please define board_detail() for your PPC platform */
