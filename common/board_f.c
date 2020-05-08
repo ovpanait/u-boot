@@ -602,7 +602,7 @@ __weak int arch_setup_bdinfo(void)
 	return 0;
 }
 
-#if defined(CONFIG_MIPS) || defined(CONFIG_SH)
+#if defined(CONFIG_MIPS)
 static int setup_board_part1(void)
 {
 	bd_t *bd = gd->bd;
@@ -943,7 +943,7 @@ static const init_fnc_t init_sequence_f[] = {
 	dram_init_banksize,
 	show_dram_config,
 	arch_setup_bdinfo,
-#if defined(CONFIG_MIPS) || defined(CONFIG_SH)
+#if defined(CONFIG_MIPS)
 	setup_board_part1,
 	INIT_FUNC_WATCHDOG_RESET
 #endif
