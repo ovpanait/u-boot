@@ -602,7 +602,7 @@ __weak int arch_setup_bdinfo(void)
 	return 0;
 }
 
-#if defined(CONFIG_M68K) || defined(CONFIG_MIPS) || defined(CONFIG_PPC) || \
+#if defined(CONFIG_MIPS) || defined(CONFIG_PPC) || \
 	defined(CONFIG_SH)
 static int setup_board_part1(void)
 {
@@ -622,9 +622,6 @@ static int setup_board_part1(void)
 #if defined(CONFIG_E500) || defined(CONFIG_MPC86xx)
 	bd->bi_immr_base = CONFIG_SYS_IMMR;	/* base  of IMMR register     */
 #endif
-#if defined(CONFIG_M68K)
-	bd->bi_mbar_base = CONFIG_SYS_MBAR;	/* base of internal registers */
-#endif
 #if defined(CONFIG_MPC83xx)
 	bd->bi_immrbar = CONFIG_SYS_IMMR;
 #endif
@@ -633,7 +630,7 @@ static int setup_board_part1(void)
 }
 #endif
 
-#if defined(CONFIG_PPC) || defined(CONFIG_M68K)
+#if defined(CONFIG_PPC)
 static int setup_board_part2(void)
 {
 	bd_t *bd = gd->bd;
@@ -646,9 +643,6 @@ static int setup_board_part2(void)
 	bd->bi_sccfreq = gd->arch.scc_clk;
 	bd->bi_vco = gd->arch.vco_out;
 #endif /* CONFIG_CPM2 */
-#if defined(CONFIG_M68K) && defined(CONFIG_PCI)
-	bd->bi_pcifreq = gd->pci_clk;
-#endif
 #if defined(CONFIG_EXTRA_CLOCK)
 	bd->bi_inpfreq = gd->arch.inp_clk;	/* input Freq in Hz */
 	bd->bi_vcofreq = gd->arch.vco_clk;	/* vco Freq in Hz */
@@ -980,11 +974,11 @@ static const init_fnc_t init_sequence_f[] = {
 	dram_init_banksize,
 	show_dram_config,
 	arch_setup_bdinfo,
-#if defined(CONFIG_M68K) || defined(CONFIG_MIPS) || defined(CONFIG_PPC) || \
+#if defined(CONFIG_MIPS) || defined(CONFIG_PPC) || \
 	defined(CONFIG_SH)
 	setup_board_part1,
 #endif
-#if defined(CONFIG_PPC) || defined(CONFIG_M68K)
+#if defined(CONFIG_PPC)
 	INIT_FUNC_WATCHDOG_RESET
 	setup_board_part2,
 #endif
