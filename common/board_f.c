@@ -602,26 +602,6 @@ __weak int arch_setup_bdinfo(void)
 	return 0;
 }
 
-#if defined(CONFIG_MIPS)
-static int setup_board_part1(void)
-{
-	bd_t *bd = gd->bd;
-
-	/*
-	 * Save local variables to board info struct
-	 */
-	bd->bi_memstart = CONFIG_SYS_SDRAM_BASE;	/* start of memory */
-	bd->bi_memsize = gd->ram_size;			/* size in bytes */
-
-#ifdef CONFIG_SYS_SRAM_BASE
-	bd->bi_sramstart = CONFIG_SYS_SRAM_BASE;	/* start of SRAM */
-	bd->bi_sramsize = CONFIG_SYS_SRAM_SIZE;		/* size  of SRAM */
-#endif
-
-	return 0;
-}
-#endif
-
 #ifdef CONFIG_POST
 static int init_post(void)
 {
@@ -942,11 +922,8 @@ static const init_fnc_t init_sequence_f[] = {
 	reserve_stacks,
 	dram_init_banksize,
 	show_dram_config,
-	arch_setup_bdinfo,
-#if defined(CONFIG_MIPS)
-	setup_board_part1,
 	INIT_FUNC_WATCHDOG_RESET
-#endif
+	arch_setup_bdinfo,
 	display_new_sp,
 #ifdef CONFIG_OF_BOARD_FIXUP
 	fix_fdt,

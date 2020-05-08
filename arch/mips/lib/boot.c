@@ -9,6 +9,24 @@
 
 DECLARE_GLOBAL_DATA_PTR;
 
+int arch_setup_bdinfo(void)
+{
+	bd_t *bd = gd->bd;
+
+	/*
+	 * Save local variables to board info struct
+	 */
+	bd->bi_memstart = CONFIG_SYS_SDRAM_BASE;	/* start of memory */
+	bd->bi_memsize = gd->ram_size;			/* size in bytes */
+
+	if (IS_ENABLED(CONFIG_SYS_HAS_SRAM)) {
+		bd->bi_sramstart = CONFIG_SYS_SRAM_BASE;	/* start of SRAM */
+		bd->bi_sramsize = CONFIG_SYS_SRAM_SIZE;		/* size  of SRAM */
+	}
+
+	return 0;
+}
+
 unsigned long do_go_exec(ulong (*entry)(int, char * const []),
 			 int argc, char * const argv[])
 {
