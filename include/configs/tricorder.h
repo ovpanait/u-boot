@@ -200,9 +200,6 @@
 						CONFIG_SYS_INIT_RAM_SIZE - \
 						GENERATED_GBL_DATA_SIZE)
 
-/* SRAM config */
-#define CONFIG_SYS_SRAM_START		0x40200000
-
 /* Defines for SPL */
 
 #define CONFIG_SPL_NAND_BASE
