@@ -311,6 +311,17 @@ void pci_init_board(void);
 int arch_initr_trap(void);
 
 /**
+ * bedbug_init() - init bedbug debugger
+ *
+ * Initialize the bug_ctx structure used by the bedbug debugger.  This is
+ * specific to the CPU since each has different debug registers and
+ * settings.
+ *
+ * Return: 0 if OK
+ */
+int bedbug_init(void);
+
+/**
  * main_loop() - Enter the main loop of U-Boot
  *
  * This normally runs the command line.

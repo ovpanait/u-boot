@@ -38,22 +38,6 @@ int bedbug_puts (const char *str)
 	return 0;
 }				/* bedbug_puts */
 
-
-
-/* ======================================================================
- * Initialize the bug_ctx structure used by the bedbug debugger.  This is
- * specific to the CPU since each has different debug registers and
- * settings.
- * ====================================================================== */
-
-int bedbug_init(void)
-{
-	/* -------------------------------------------------- */
-	return 0;
-}				/* bedbug_init */
-
-
-
 /* ======================================================================
  * Entry point from the interpreter to the disassembler.  Repeated calls
  * will resume from the last disassembled address.

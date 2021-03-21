@@ -5,7 +5,6 @@ struct cmd_tbl;
 
 /* Supporting routines */
 int bedbug_puts (const char *);
-int bedbug_init(void);
 void bedbug860_init (void);
 void do_bedbug_breakpoint (struct pt_regs *);
 void bedbug_main_loop (unsigned long, struct pt_regs *);
