@@ -39,7 +39,7 @@ typedef
 kgdb_data;
 
 /* these functions are provided by the generic kgdb support */
-extern void kgdb_init(void);
+extern int kgdb_init(void);
 extern void kgdb_error(int);
 extern int kgdb_output_string(const char *, unsigned int);
 extern void breakpoint(void);
