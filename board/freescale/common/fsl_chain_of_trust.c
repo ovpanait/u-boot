@@ -17,7 +17,7 @@
 #endif
 
 #ifdef CONFIG_ADDR_MAP
-#include <asm/mmu.h>
+#include <addr_map.h>
 #endif
 
 #ifdef CONFIG_FSL_CORENET

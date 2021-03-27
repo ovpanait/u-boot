@@ -21,4 +21,14 @@ void *addrmap_phys_to_virt(phys_addr_t paddr);
 void addrmap_set_entry(unsigned long vaddr, phys_addr_t paddr,
 		       phys_size_t size, int idx);
 
+/**
+ * init_addr_map()
+ *
+ * Initialize non-identity virtual-physical memory mappings for 32bit CPUs.
+ * It is called during the generic board init sequence, after relocation.
+ *
+ * Return: 0 if OK
+ */
+int init_addr_map(void);
+
 #endif

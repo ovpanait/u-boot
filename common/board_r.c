@@ -59,9 +59,7 @@
 #ifdef CONFIG_XEN
 #include <xen.h>
 #endif
-#ifdef CONFIG_ADDR_MAP
-#include <asm/mmu.h>
-#endif
+#include <addr_map.h>
 #include <asm/sections.h>
 #include <dm/root.h>
 #include <linux/compiler.h>
