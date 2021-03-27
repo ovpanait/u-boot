@@ -78,7 +78,7 @@ int cpu_init_r(void)
 
 #ifdef CONFIG_ADDR_MAP
 /* Initialize address mapping array */
-void init_addr_map(void)
+int init_addr_map(void)
 {
 	int i;
 	ppc_bat_t bat = DBAT0;
@@ -100,5 +100,7 @@ void init_addr_map(void)
 			bat = DBAT4 - 1;
 #endif
 	}
+
+	return 0;
 }
 #endif
